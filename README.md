@@ -101,16 +101,43 @@ assumes everything from the ones before it.
 ```
 .
 ├── README.md
+├── bin-hex_converter.cpp          # pre-project baseline (predates the instructor rules)
 ├── project-NN-<name>/
-│   ├── <name>.cpp          # the deliverable
-│   ├── context.md          # concepts, spec, review findings, open items
-│   └── .vscode/
-│       └── tasks.json      # build task
+│   ├── <name>.cpp                 # the deliverable
+│   └── context.md                 # concepts, spec, review findings, open items
+├── .vscode/
+│   └── tasks.json                 # shared build task (builds whatever file is active)
 └── ...
 ```
 
 Each project directory is self-contained. The `context.md` is the interesting file — it's a
 record of everything that was wrong on the first attempt and why.
+
+---
+
+## Projects
+
+| # | Project | Source | Write-up |
+|---|---|---|---|
+| — | Binary ↔ Hexadecimal Converter *(pre-project baseline)* | [`bin-hex_converter.cpp`](bin-hex_converter.cpp) | — |
+| 1 | Caesar Cipher | [`caeser_cipher.cpp`](project-01-caesar-cipher/caeser_cipher.cpp) | [`context.md`](project-01-caesar-cipher/context.md) |
+| 2 | Numeric Statistics Tool | [`cl-num_statistics.cpp`](project-02-numeric-statistics/cl-num_statistics.cpp) | [`context.md`](project-02-numeric-statistics/context.md) |
+
+**Binary ↔ Hexadecimal Converter** — written before this project's rules were in place;
+used as the calibration point for Project 1 (its `-Wshadow` and signed/unsigned findings
+were closed retroactively — see Project 2's write-up).
+
+**Project 1 — Caesar Cipher.** First project under the instructor rules. Covers `char` as
+an integer type, pass-by-value vs. reference, `const`, signed/unsigned pitfalls,
+range-based for, and the sign of `%` on negative operands in C++ vs. Python.
+
+**Project 2 — Numeric Statistics Tool.** Command-line tool that repeatedly reads a line of
+comma-separated integers, validates every token by hand (no `<sstream>`, no `<algorithm>`),
+and reports count/sum/min/max/mean. Introduces `std::vector`, `try`/`catch`, `std::cin`
+failure/EOF states, the `bool` + out-parameter error pattern, and overflow-safe aggregation
+(`long long` accumulator for `sum`). Five review rounds; all findings closed — see the
+write-up for the full list, including a stack-overflow-via-recursion bug on Ctrl+D found in
+round 1.
 
 ---
 
@@ -180,4 +207,7 @@ exercise:
 
 ## Status
 
-See individual project directories. Each `context.md` ends with a list of items still open.
+Two projects complete (see the [Projects](#projects) table above). Each `context.md` ends
+with a list of items still open; Project 2's carries forward a `median` stretch goal and a
+`parse_int` rewrite without `std::stoi`, both slated for whichever future project revisits
+that code.
